@@ -4,6 +4,8 @@ python:
 install:
   - "pip install -r requirements.txt"
   - "pip install -r test-requirements.txt"
+env:
+  - TRAVIS_RUN=1
 script: nosetests
 branches:
   only:
