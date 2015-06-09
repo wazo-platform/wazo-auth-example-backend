@@ -27,7 +27,7 @@ User = namedtuple('User', ['username', 'password', 'uuid'])
 
 class ExampleBackend(BaseAuthenticationBackend):
     '''
-    A simple backend implementing the authentification for a static user list
+    A simple backend implementing the authentication for a static user list
     define in the constructor.
 
     This is a toy example but the same logic would apply to a plugin searching
@@ -55,7 +55,7 @@ class ExampleBackend(BaseAuthenticationBackend):
 
     def verify_password(self, username, password):
         '''
-        returns True of False for a given username password combination.
+        returns True or False for a given username password combination.
         '''
         try:
             return self._users[username].password == password
