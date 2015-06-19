@@ -19,13 +19,11 @@ import logging
 
 from collections import namedtuple
 
-from xivo_auth import BaseAuthenticationBackend
-
 logger = logging.getLogger(__name__)
 User = namedtuple('User', ['username', 'password', 'uuid'])
 
 
-class ExampleBackend(BaseAuthenticationBackend):
+class ExampleBackend(object):
     '''
     A simple backend implementing the authentication for a static user list
     define in the constructor.
@@ -40,7 +38,6 @@ class ExampleBackend(BaseAuthenticationBackend):
         properly. The process configuration is received as the only argument.
         '''
         logger.warning('example backend is enabled and should NOT be used in production')
-        super(ExampleBackend, self).__init__(configuration)
         self._users = {
             'alice': User('alice', 's3cre7', '63f3dc3c-865d-419e-bec2-e18c4b118224'),
             'bob': User('bob', 'abc123', '6a6fb854-d2b3-4911-a0e2-d6de4b9030d4'),
