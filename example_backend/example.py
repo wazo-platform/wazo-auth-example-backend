@@ -55,9 +55,7 @@ class ExampleBackend(object):
         return self._users[username].uuid, None
 
     def verify_password(self, username, password):
-        """
-        returns True or False for a given username password combination.
-        """
+        """Checks if a username/password combination matches, return True or False"""
         try:
             return self._users[username].password == password
         except KeyError:
