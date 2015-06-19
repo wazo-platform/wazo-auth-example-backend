@@ -47,11 +47,15 @@ class ExampleBackend(BaseAuthenticationBackend):
             'charlie': User('charlie', 'lovecat', '02d94074-4f99-42ec-9df7-51b6765185ac'),
         }
 
-    def get_uuid(self, username):
+    def get_ids(self, username):
+        '''Finds the unique identifier for this user.
+
+        Since this backend cannot know about xivo users uuid, it returns None
+        as the second element of the tuple.
+
+        Returns the tuple (identifier, None)
         '''
-        returns the unique id of this entry, this does not have to be a UUID.
-        '''
-        return self._users[username].uuid
+        return self._users[username].uuid, None
 
     def verify_password(self, username, password):
         '''
