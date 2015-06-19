@@ -24,19 +24,19 @@ User = namedtuple('User', ['username', 'password', 'uuid'])
 
 
 class ExampleBackend(object):
-    '''
+    """
     A simple backend implementing the authentication for a static user list
     define in the constructor.
 
     This is a toy example but the same logic would apply to a plugin searching
     an ldap server or querying an other external service.
-    '''
+    """
 
     def __init__(self, configuration):
-        '''
+        """
         Does any initialisation that is required for this backend to work
         properly. The process configuration is received as the only argument.
-        '''
+        """
         logger.warning('example backend is enabled and should NOT be used in production')
         self._users = {
             'alice': User('alice', 's3cre7', '63f3dc3c-865d-419e-bec2-e18c4b118224'),
@@ -45,19 +45,19 @@ class ExampleBackend(object):
         }
 
     def get_ids(self, username):
-        '''Finds the unique identifier for this user.
+        """Finds the unique identifier for this user.
 
         Since this backend cannot know about xivo users uuid, it returns None
         as the second element of the tuple.
 
         Returns the tuple (identifier, None)
-        '''
+        """
         return self._users[username].uuid, None
 
     def verify_password(self, username, password):
-        '''
+        """
         returns True or False for a given username password combination.
-        '''
+        """
         try:
             return self._users[username].password == password
         except KeyError:
