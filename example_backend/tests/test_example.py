@@ -36,6 +36,6 @@ class TestExample(unittest.TestCase):
     def test_get_uuid(self):
         backend = ExampleBackend({})
 
-        uuid = backend.get_uuid('bob')
+        uuid = backend.get_ids('bob')
 
-        assert_that(uuid, equal_to('6a6fb854-d2b3-4911-a0e2-d6de4b9030d4'))
+        assert_that(uuid, equal_to(('6a6fb854-d2b3-4911-a0e2-d6de4b9030d4', None)))

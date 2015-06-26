@@ -19,44 +19,43 @@ import logging
 
 from collections import namedtuple
 
-from xivo_auth import BaseAuthenticationBackend
-
 logger = logging.getLogger(__name__)
 User = namedtuple('User', ['username', 'password', 'uuid'])
 
 
-class ExampleBackend(BaseAuthenticationBackend):
-    '''
+class ExampleBackend(object):
+    """
     A simple backend implementing the authentication for a static user list
     define in the constructor.
 
     This is a toy example but the same logic would apply to a plugin searching
     an ldap server or querying an other external service.
-    '''
+    """
 
     def __init__(self, configuration):
-        '''
+        """
         Does any initialisation that is required for this backend to work
         properly. The process configuration is received as the only argument.
-        '''
+        """
         logger.warning('example backend is enabled and should NOT be used in production')
-        super(ExampleBackend, self).__init__(configuration)
         self._users = {
             'alice': User('alice', 's3cre7', '63f3dc3c-865d-419e-bec2-e18c4b118224'),
             'bob': User('bob', 'abc123', '6a6fb854-d2b3-4911-a0e2-d6de4b9030d4'),
             'charlie': User('charlie', 'lovecat', '02d94074-4f99-42ec-9df7-51b6765185ac'),
         }
 
-    def get_uuid(self, username):
-        '''
-        returns the unique id of this entry, this does not have to be a UUID.
-        '''
-        return self._users[username].uuid
+    def get_ids(self, username):
+        """Finds the unique identifier for this user.
+
+        Since this backend cannot know about xivo users uuid, it returns None
+        as the second element of the tuple.
+
+        Returns the tuple (identifier, None)
+        """
+        return self._users[username].uuid, None
 
     def verify_password(self, username, password):
-        '''
-        returns True or False for a given username password combination.
-        '''
+        """Checks if a username/password combination matches, return True or False"""
         try:
             return self._users[username].password == password
         except KeyError:
