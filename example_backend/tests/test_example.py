@@ -17,7 +17,7 @@
 
 import unittest
 
-from hamcrest import all_of, assert_that, equal_to, is_
+from hamcrest import assert_that, equal_to, is_
 
 from ..example import ExampleBackend
 
@@ -36,6 +36,13 @@ class TestExample(unittest.TestCase):
     def test_get_uuid(self):
         backend = ExampleBackend({})
 
-        uuid = backend.get_ids('bob')
+        uuid = backend.get_ids('bob', {})
 
         assert_that(uuid, equal_to(('6a6fb854-d2b3-4911-a0e2-d6de4b9030d4', None)))
+
+    def test_get_acls(self):
+        backend = ExampleBackend({})
+
+        acls = backend.get_acls('bob', {})
+        rule = 'path/to/give/token/access/{identifier}'.format(identifier='6a6fb854-d2b3-4911-a0e2-d6de4b9030d4')
+        assert_that(acls, equal_to(([{'rule': rule, 'policy': 'write'}])))

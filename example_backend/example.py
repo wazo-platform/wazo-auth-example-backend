@@ -44,7 +44,20 @@ class ExampleBackend(object):
             'charlie': User('charlie', 'lovecat', '02d94074-4f99-42ec-9df7-51b6765185ac'),
         }
 
-    def get_ids(self, username):
+    def get_acls(self, username, args):
+        """Find the acls for this user.
+
+        {'rule': '', 'policy': 'deny'} is applied by default.
+
+        Returns a list of dictionaries containing the rules and policies for this login.
+        [{'rule':'/xivo/consul/path/', 'policy': 'write'}]
+        Note: The ACLs are applied by order.
+        """
+
+        rule = 'path/to/give/token/access/{identifier}'.format(identifier=self._users[username].uuid)
+        return [{'rule': rule, 'policy': 'write'}]
+
+    def get_ids(self, username, args):
         """Finds the unique identifier for this user.
 
         Since this backend cannot know about xivo users uuid, it returns None
