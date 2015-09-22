@@ -40,9 +40,9 @@ class TestExample(unittest.TestCase):
 
         assert_that(uuid, equal_to(('6a6fb854-d2b3-4911-a0e2-d6de4b9030d4', None)))
 
-    def test_get_acls(self):
+    def test_get_consul_acls(self):
         backend = ExampleBackend({})
 
-        acls = backend.get_acls('bob', {})
+        acls = backend.get_consul_acls('bob', {})
         rule = 'path/to/give/token/access/{identifier}'.format(identifier='6a6fb854-d2b3-4911-a0e2-d6de4b9030d4')
         assert_that(acls, equal_to(([{'rule': rule, 'policy': 'write'}])))
