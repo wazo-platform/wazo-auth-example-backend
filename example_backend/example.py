@@ -45,7 +45,13 @@ class ExampleBackend(object):
         }
 
     def get_acls(self, username, args):
-        """Find the acls for this user.
+        """
+        Returns the ACLs for this user
+        """
+        return []
+
+    def get_consul_acls(self, username, args):
+        """Generates the consul ACLs for this user.
 
         {'rule': '', 'policy': 'deny'} is applied by default.
 
