@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2015 Avencall
+# Copyright (C) 2015-2016 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@ class TestExample(unittest.TestCase):
     def test_verify_password(self):
         backend = ExampleBackend({})
 
-        matching = backend.verify_password('alice', 's3cre7')
-        not_matching = backend.verify_password('charlie', 'catlove')
+        matching = backend.verify_password('alice', 's3cre7', {})
+        not_matching = backend.verify_password('charlie', 'catlove', {})
 
         assert_that(matching, is_(True))
         assert_that(not_matching, is_(False))
