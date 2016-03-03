@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2015 Avencall
+# Copyright (C) 2015-2016 Avencall
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -73,7 +73,7 @@ class ExampleBackend(object):
         """
         return self._users[username].uuid, None
 
-    def verify_password(self, username, password):
+    def verify_password(self, username, password, args):
         """Checks if a username/password combination matches, return True or False"""
         try:
             return self._users[username].password == password
