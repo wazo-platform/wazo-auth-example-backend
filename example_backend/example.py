@@ -50,19 +50,6 @@ class ExampleBackend(object):
         """
         return []
 
-    def get_consul_acls(self, username, args):
-        """Generates the consul ACLs for this user.
-
-        {'rule': '', 'policy': 'deny'} is applied by default.
-
-        Returns a list of dictionaries containing the rules and policies for this login.
-        [{'rule':'/xivo/consul/path/', 'policy': 'write'}]
-        Note: The ACLs are applied by order.
-        """
-
-        rule = 'path/to/give/token/access/{identifier}'.format(identifier=self._users[username].uuid)
-        return [{'rule': rule, 'policy': 'write'}]
-
     def get_ids(self, username, args):
         """Finds the unique identifier for this user.
 
