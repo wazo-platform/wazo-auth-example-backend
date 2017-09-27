@@ -18,7 +18,7 @@ python setup.py install
 This will disable all other plugins
 
 ```sh
-cat << EOF > /etc/xivo-auth/conf.d/enable_example.yml
+cat << EOF > /etc/wazo-auth/conf.d/enable_example.yml
 enabled_plugins:
     - example
 EOF
@@ -28,6 +28,6 @@ service xivo-auth restart
 ## Disabling the plugin
 
 ```sh
-rm -f /etc/xivo-auth/conf.d/enable_example.yml
+rm -f /etc/wazo-auth/conf.d/enable_example.yml
 service xivo-auth restart
 ```
