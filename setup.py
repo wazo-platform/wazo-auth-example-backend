@@ -6,10 +6,10 @@ from setuptools import setup
 
 
 setup(
-    name='xivo_auth-example-backend',
+    name='wazo_auth-example-backend',
     version='0.0.1',
 
-    description='A simple example backend plugin for xivo-auth',
+    description='A simple example backend plugin for wazo-auth',
 
     author='Wazo Authors',
     author_email='dev@wazo.community',
