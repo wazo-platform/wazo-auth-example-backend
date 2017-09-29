@@ -12,14 +12,14 @@ setup(
     description='A simple example backend plugin for xivo-auth',
 
     author='Wazo Authors',
-    author_email='dev.wazo@gmail.com',
+    author_email='dev@wazo.community',
 
     url='http://wazo.community',
 
     packages=find_packages(),
 
     entry_points={
-        'xivo_auth.backends': [
+        'wazo_auth.backends': [
             'example = example_backend.example:ExampleBackend',
         ],
     }
