@@ -15,12 +15,10 @@ python setup.py install
 
 ## Enabling the plugin
 
-This will disable all other plugins
-
 ```sh
 cat << EOF > /etc/wazo-auth/conf.d/enable_example.yml
-enabled_plugins:
-    - example
+enabled_backend_plugins:
+    example: true
 EOF
 systemctl restart wazo-auth
 ```
