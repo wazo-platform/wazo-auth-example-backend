@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2015-2016 Avencall
+# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,12 +18,13 @@
 import logging
 
 from collections import namedtuple
+from wazo_auth import BaseAuthenticationBackend
 
 logger = logging.getLogger(__name__)
 User = namedtuple('User', ['username', 'password', 'uuid'])
 
 
-class ExampleBackend(object):
+class ExampleBackend(BaseAuthenticationBackend):
     """
     A simple backend implementing the authentication for a static user list
     define in the constructor.
@@ -48,17 +49,24 @@ class ExampleBackend(object):
         """
         Returns the ACLs for this user
         """
+        # args['metadata'] can be used here to generate ACLs
         return []
 
-    def get_ids(self, username, args):
-        """Finds the unique identifier for this user.
-
-        Since this backend cannot know about xivo users uuid, it returns None
-        as the second element of the tuple.
-
-        Returns the tuple (identifier, None)
+    def get_metadata(self, username, args):
         """
-        return self._users[username].uuid, None
+        returns information concerning this user that will be included in the user's
+        token metadata.
+
+        metadatas can also be used to render ACLs.
+        """
+        # Using the BaseAuthenticationBackend will set the following values in the
+        # metadata. "xivo_user_uuid" = None, "auth_id" = None, "username" = username
+        # "xivo_uuid" = the value of the XIVO_UUID environment variable.
+        # These fields should be in the metadata if the you do not wish to use
+        # inheritance.
+        metadata = super(ExampleBackend, self).get_metadata(username, args)
+        metadata['auth_id'] = self._users['username'].uuid
+        return metadata
 
     def verify_password(self, username, password, args):
         """Checks if a username/password combination matches, return True or False"""
