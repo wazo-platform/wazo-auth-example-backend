@@ -1,7 +1,5 @@
 # Wazo auth example backend
 
-[![Build Status](https://travis-ci.org/wazo-pbx/wazo-auth-example-backend.svg)](https://travis-ci.org/wazo-pbx/wazo-auth-example-backend)
-
 this is an example implementation of a wazo-auth plugin. It should _NEVER_ be used in production
 as the username and password combination are public and will result in a valid wazo-auth token
 being issued.
