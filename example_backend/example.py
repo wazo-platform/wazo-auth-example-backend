@@ -1,4 +1,4 @@
-# Copyright 2015-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2015-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 import logging
@@ -46,7 +46,7 @@ class ExampleBackend(BaseAuthenticationBackend):
         metadatas can also be used to render ACLs.
         """
         # Using the BaseAuthenticationBackend will set the following values in the
-        # metadata. "xivo_user_uuid" = None, "auth_id" = None, "username" = username
+        # metadata. "pbx_user_uuid" = None, "auth_id" = None, "username" = username
         # "xivo_uuid" = the value of the XIVO_UUID environment variable.
         # These fields should be in the metadata if the you do not wish to use
         # inheritance.
